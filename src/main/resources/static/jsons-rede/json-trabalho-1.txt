@@ -1,0 +1,69 @@
+{
+  "lugarList": [
+    {
+      "nome": "L1",
+      "quantidadeDeToken": 1
+    },
+    {
+      "nome": "L2",
+      "quantidadeDeToken": 2
+    },
+    {
+      "nome": "L3",
+      "quantidadeDeToken": 0
+    },
+    {
+      "nome": "L4",
+      "quantidadeDeToken": 1
+    },
+    {
+      "nome": "L5",
+      "quantidadeDeToken": 0
+    }
+  ],
+  "transicaoList": [
+    {
+      "nome": "T1",
+      "conexaoDeEntradaList": [
+        {
+          "nomeLugar": "L1",
+          "peso": 1
+        },
+        {
+          "nomeLugar": "L2",
+          "peso": 2
+        }
+      ],
+      "conexaoDeSaidaList": [
+        {
+          "nomeLugar": "L2",
+          "peso": 2
+        },
+        {
+          "nomeLugar": "L3",
+          "peso": 1
+        }
+      ]
+    },
+    {
+      "nome": "T2",
+      "conexaoDeEntradaList": [
+        {
+          "nomeLugar": "L3",
+          "peso": 1
+        },
+        {
+          "nomeLugar": "L4",
+          "peso": 1
+        }
+      ],
+      "conexaoDeSaidaList": [
+        {
+          "nomeLugar": "L5",
+          "peso": 1
+        }
+      ]
+    }
+    
+  ]
+}
