@@ -42,7 +42,7 @@ public class RedeDePetriController {
     @PostMapping("/criar/lugar")
     @ResponseStatus(HttpStatus.CREATED)
     public void criaLugar(@RequestBody @Valid Lugar lugarRequest) {
-        //TODO redeDePetriService.criaLugar(lugarRequest);
+        redeDePetriService.criaLugar(lugarRequest);
     }
 
     @DeleteMapping("/deletar/lugar/{nomeLugar}")
