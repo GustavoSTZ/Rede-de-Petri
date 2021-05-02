@@ -15,8 +15,10 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class ConexaoRequest {
 
-    @NotNull(message = "Para identificarmos a conexao caso queiramos deleta-la")
-    private String nomeConexao;
+    private boolean entrada;
+
+    @NotNull(message = "Para identificarmos a qual a transicao")
+    private String nomeTransicao;
 
     @NotNull(message = "Conexão deve conter lugar para apontar ou ser apontado para algum lugar/transicao")
     private String nomeLugar;
