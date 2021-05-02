@@ -32,6 +32,7 @@ public class RedeDePetriService {
                     populaToken(transicaoRequest.getConexaoDeEntradaList());
                     populaToken(transicaoRequest.getConexaoDeSaidaList());
                 });
+        System.out.println(RedeDePetriRepository.redeDePetri);
     }
 
     private void populaToken(List<Conexao> conexaoList) {
@@ -48,7 +49,7 @@ public class RedeDePetriService {
     }
 
     public void deletarLugar(String nomeLugar) {
-        Lugar lugarDeletado = RedeDePetriRepository.mapeamentoLugares.get(nomeLugar);
+        Lugar lugarDeletado = RedeDePetriRepository.mapeamentoLugares.remove(nomeLugar);
         if (isNull(lugarDeletado)) {
             throw new ResourceNotFoundException();
         }

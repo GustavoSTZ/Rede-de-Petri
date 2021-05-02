@@ -1,5 +1,6 @@
 package br.edu.unisinos.rededepetri.controller.request;
 
+import br.edu.unisinos.rededepetri.domain.TipoArco;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,10 +15,15 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class ConexaoRequest {
 
+    @NotNull(message = "Para identificarmos a conexao caso queiramos deleta-la")
+    private String nomeConexao;
+
     @NotNull(message = "Conexão deve conter lugar para apontar ou ser apontado para algum lugar/transicao")
     private String nomeLugar;
 
+    @NotNull
     @Min(value = 1, message = "O mínimo que uma Conexão pode ter de peso é 1")
-    @Value(value = "1") // Para caso não seja informado
     private Integer peso;
+
+    private TipoArco tipoArco = TipoArco.NORMAL;
 }
