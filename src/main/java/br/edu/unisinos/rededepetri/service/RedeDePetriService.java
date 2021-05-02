@@ -119,6 +119,6 @@ public class RedeDePetriService {
         }
 
         RedeDePetriRepository.redeDePetri.getTransicaoList().add(
-                new Transicao(transicaoRequest.getNome(), transicaoRequest.getConexaoDeEntradaList().stream().map(conexaoRequest -> new Conexao(conexaoRequest.getNomeConexao(), RedeDePetriRepository.mapeamentoLugares.get(conexaoRequest.getNomeLugar()), conexaoRequest.getPeso(), conexaoRequest.getTipoArco())).collect(Collectors.toList()), transicaoRequest.getConexaoDeSaidaList().stream().map(conexaoRequest -> new Conexao(conexaoRequest.getNomeLugar(), RedeDePetriRepository.mapeamentoLugares.get(conexaoRequest.getNomeLugar()), conexaoRequest.getPeso(), conexaoRequest.getTipoArco())).collect(Collectors.toList())));
+                new Transicao(transicaoRequest.getNome(), transicaoRequest.getConexaoDeEntradaList().stream().map(conexaoRequest -> new Conexao(conexaoRequest.getNomeConexao(), RedeDePetriRepository.mapeamentoLugares.get(conexaoRequest.getNomeLugar()), conexaoRequest.getPeso(), conexaoRequest.getTipoArco())).collect(Collectors.toList()), transicaoRequest.getConexaoDeSaidaList().stream().map(conexaoRequest -> new Conexao(conexaoRequest.getNomeConexao(), RedeDePetriRepository.mapeamentoLugares.get(conexaoRequest.getNomeLugar()), conexaoRequest.getPeso(), conexaoRequest.getTipoArco())).collect(Collectors.toList())));
     }
 }
