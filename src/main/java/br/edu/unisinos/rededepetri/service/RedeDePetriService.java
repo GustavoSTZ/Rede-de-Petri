@@ -4,6 +4,7 @@ import br.edu.unisinos.rededepetri.controller.request.RedeDePetriRequest;
 import br.edu.unisinos.rededepetri.domain.Conexao;
 import br.edu.unisinos.rededepetri.domain.Lugar;
 import br.edu.unisinos.rededepetri.domain.RedeDePetri;
+import br.edu.unisinos.rededepetri.exception.ResourceNotFoundException;
 import br.edu.unisinos.rededepetri.repository.RedeDePetriRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static java.util.Objects.isNull;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -26,9 +29,9 @@ public class RedeDePetriService {
         RedeDePetriRepository.redeDePetri
                 .getTransicaoList()
                 .forEach(transicaoRequest -> {
-                            populaToken(transicaoRequest.getConexaoDeEntradaList());
-                            populaToken(transicaoRequest.getConexaoDeSaidaList());
-                        });
+                    populaToken(transicaoRequest.getConexaoDeEntradaList());
+                    populaToken(transicaoRequest.getConexaoDeSaidaList());
+                });
     }
 
     private void populaToken(List<Conexao> conexaoList) {
@@ -44,7 +47,25 @@ public class RedeDePetriService {
         );
     }
 
-//    public void deletarLugar(String nomeLugar){
-//
-//    }
+    public void deletarLugar(String nomeLugar) {
+        Lugar lugarDeletado = RedeDePetriRepository.mapeamentoLugares.get(nomeLugar);
+        if (isNull(lugarDeletado)) {
+            throw new ResourceNotFoundException();
+        }
+        RedeDePetriRepository.redeDePetri.getLugarList().remove(lugarDeletado);
+        RedeDePetriRepository.redeDePetri.getTransicaoList().forEach(
+                transicao -> {
+                    transicao.setConexaoDeEntradaList(removeConexoesQuePossuemLugarDeletado(transicao.getConexaoDeEntradaList(), lugarDeletado));
+                    transicao.setConexaoDeSaidaList(removeConexoesQuePossuemLugarDeletado(transicao.getConexaoDeSaidaList(), lugarDeletado));
+                }
+        );
+    }
+
+    private List<Conexao> removeConexoesQuePossuemLugarDeletado(List<Conexao> conexoes, Lugar lugarDeletado) {
+        return conexoes.stream()
+                        .filter(conexao -> !conexao.getLugar().equals(lugarDeletado))
+                .collect(Collectors.toList());
+    }
+
+
 }

@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.Validator;
 
 @RestController
 @RequestMapping("/rede-de-petri")
@@ -23,9 +22,9 @@ public class RedeDePetriController {
         redeDePetriService.criaRedeDePetri(redeDePetri);
     }
 
-//    @DeleteMapping("/deletar-lugar/{nomeLugar}")
-//    @ResponseStatus(HttpStatus.OK)
-//    public void deletarLugar(@PathVariable("nomeLugar") String nomeLugar) {
-//        redeDePetriService.deletarLugar(nomeLugar);
-//    }
+    @DeleteMapping("/deletar-lugar/{nomeLugar}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deletarLugar(@PathVariable("nomeLugar") String nomeLugar) {
+        redeDePetriService.deletarLugar(nomeLugar);
+    }
 }
