@@ -88,6 +88,12 @@ public class RedeDePetriService {
             nomeConexao = conexaoRequest.getNomeTransicao() + "->" + conexaoRequest.getNomeLugar();
         }
 
+        Optional<Conexao> optionalConexao = conexaoList.stream().filter(c -> c.getNomeConexao().equals(nomeConexao)).findAny();
+
+        if(optionalConexao.isPresent()) {
+            throw new RuntimeException("Conexão: " + nomeConexao + " já existe");
+        }
+
         conexaoList.add(new Conexao(nomeConexao, lugar, conexaoRequest.getPeso(), conexaoRequest.getTipoArco()));
     }
 
