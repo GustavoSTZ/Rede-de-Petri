@@ -24,6 +24,11 @@ public class EngineRedeDePetriService {
                     if (transicao.getConexaoDeEntradaList()
                             .stream()
                             .allMatch(conexao -> conexao.getPeso() <= conexao.getLugar().getQuantidadeDeToken())
+                            &&
+                            transicao.getConexaoDeEntradaList()
+                            .stream()
+                            .noneMatch(conexao -> conexao.getTipoArco().equals(TipoArco.INIBIDOR)
+                                    && conexao.getPeso() <= conexao.getLugar().getQuantidadeDeToken())
                     ) {
                         executarTransicaoEntrada(transicao);
                         executouTransicao.set(true);
@@ -63,8 +68,10 @@ public class EngineRedeDePetriService {
     }
 
     private void consomeToken(Conexao conexao) {
-        mapeamentoLugares.get(conexao.getLugar().getNome()).setQuantidadeDeToken(mapeamentoLugares.get(conexao.getLugar().getNome()).getQuantidadeDeToken() - (conexao.getTipoArco().equals(TipoArco.NORMAL) ? conexao.getPeso() : mapeamentoLugares.get(conexao.getLugar().getNome()).getQuantidadeDeToken()));
-        conexao.getLugar().setQuantidadeDeToken(mapeamentoLugares.get(conexao.getLugar().getNome()).getQuantidadeDeToken());
+        if(!conexao.getTipoArco().equals(TipoArco.INIBIDOR)){
+            mapeamentoLugares.get(conexao.getLugar().getNome()).setQuantidadeDeToken(mapeamentoLugares.get(conexao.getLugar().getNome()).getQuantidadeDeToken() - (conexao.getTipoArco().equals(TipoArco.NORMAL) ? conexao.getPeso() : mapeamentoLugares.get(conexao.getLugar().getNome()).getQuantidadeDeToken()));
+            conexao.getLugar().setQuantidadeDeToken(mapeamentoLugares.get(conexao.getLugar().getNome()).getQuantidadeDeToken());
+        }
     }
 
     private void distribuiToken(Conexao conexao) {
