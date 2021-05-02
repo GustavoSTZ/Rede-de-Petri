@@ -69,4 +69,7 @@ public class RedeDePetriService {
     }
 
 
+    public RedeDePetri getRedeDePetri() {
+        return RedeDePetriRepository.redeDePetri;
+    }
 }

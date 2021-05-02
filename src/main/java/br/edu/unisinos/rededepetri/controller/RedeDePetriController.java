@@ -4,6 +4,7 @@ import br.edu.unisinos.rededepetri.controller.request.ConexaoRequest;
 import br.edu.unisinos.rededepetri.controller.request.RedeDePetriRequest;
 import br.edu.unisinos.rededepetri.controller.request.TransicaoRequest;
 import br.edu.unisinos.rededepetri.domain.Lugar;
+import br.edu.unisinos.rededepetri.domain.RedeDePetri;
 import br.edu.unisinos.rededepetri.service.RedeDePetriService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +60,12 @@ public class RedeDePetriController {
     @ResponseStatus(HttpStatus.OK)
     public void deletarConexao(@PathVariable("nomeConexao") String nomeConexao) {
         //TODO redeDePetriService.deletarConexao(nomeConexao);
+    }
+
+    @GetMapping("/consultar")
+    @ResponseStatus(HttpStatus.OK)
+    public RedeDePetri getRedeDePetri() {
+        return redeDePetriService.getRedeDePetri();
     }
 
 }
