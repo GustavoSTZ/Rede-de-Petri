@@ -36,7 +36,7 @@ public class RedeDePetriController {
     @PostMapping("/criar/transicao")
     @ResponseStatus(HttpStatus.CREATED)
     public void criaTransicao(@RequestBody @Valid TransicaoRequest transicaoRequest) {
-        //TODO redeDePetriService.criaTransicao(transicaoRequest);
+        redeDePetriService.criaTransicao(transicaoRequest);
     }
 
     @PostMapping("/criar/lugar")

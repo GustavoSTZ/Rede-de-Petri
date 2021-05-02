@@ -3,6 +3,7 @@ package br.edu.unisinos.rededepetri.service;
 import br.edu.unisinos.rededepetri.controller.request.ConexaoRequest;
 import br.edu.unisinos.rededepetri.controller.request.CriaConexaoRequest;
 import br.edu.unisinos.rededepetri.controller.request.RedeDePetriRequest;
+import br.edu.unisinos.rededepetri.controller.request.TransicaoRequest;
 import br.edu.unisinos.rededepetri.domain.Conexao;
 import br.edu.unisinos.rededepetri.domain.Lugar;
 import br.edu.unisinos.rededepetri.domain.RedeDePetri;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static java.util.Objects.isNull;
@@ -67,7 +69,7 @@ public class RedeDePetriService {
 
     private List<Conexao> removeConexoesQuePossuemLugarDeletado(List<Conexao> conexoes, Lugar lugarDeletado) {
         return conexoes.stream()
-                        .filter(conexao -> !conexao.getLugar().equals(lugarDeletado))
+                .filter(conexao -> !conexao.getLugar().equals(lugarDeletado))
                 .collect(Collectors.toList());
     }
 
@@ -91,5 +93,32 @@ public class RedeDePetriService {
 
     public RedeDePetri getRedeDePetri() {
         return RedeDePetriRepository.redeDePetri;
+    }
+
+    public void criaTransicao(TransicaoRequest transicaoRequest) {
+        Optional<Transicao> optionalTransicao = RedeDePetriRepository.redeDePetri.getTransicaoList().stream().filter(t -> t.getNome().equals(transicaoRequest.getNome())).findAny();
+        if (optionalTransicao.isPresent()) {
+            throw new RuntimeException("Tranição já existe");
+        }
+
+        List<ConexaoRequest> conexaoDeEntradaList = transicaoRequest.getConexaoDeEntradaList();
+        List<ConexaoRequest> conexaoDeSaidaList = transicaoRequest.getConexaoDeSaidaList();
+
+        for (ConexaoRequest conexaoDeEntrada : conexaoDeEntradaList) {
+            Optional<Lugar> optionalLugar = RedeDePetriRepository.redeDePetri.getLugarList().stream().filter(l -> l.getNome().equals(conexaoDeEntrada.getNomeLugar())).findAny();
+            if (optionalLugar.isEmpty()) {
+                throw new RuntimeException("Lugar: " + conexaoDeEntrada.getNomeLugar() + " não existe");
+            }
+        }
+
+        for (ConexaoRequest conexaoDeSaida : conexaoDeSaidaList) {
+            Optional<Lugar> optionalLugar = RedeDePetriRepository.redeDePetri.getLugarList().stream().filter(l -> l.getNome().equals(conexaoDeSaida.getNomeLugar())).findAny();
+            if (optionalLugar.isEmpty()) {
+                throw new RuntimeException("Lugar: " + conexaoDeSaida.getNomeLugar() + " não existe");
+            }
+        }
+
+        RedeDePetriRepository.redeDePetri.getTransicaoList().add(
+                new Transicao(transicaoRequest.getNome(), transicaoRequest.getConexaoDeEntradaList().stream().map(conexaoRequest -> new Conexao(conexaoRequest.getNomeLugar() + "->" + conexaoRequest.getNomeTransicao(), RedeDePetriRepository.mapeamentoLugares.get(conexaoRequest.getNomeLugar()), conexaoRequest.getPeso(), conexaoRequest.getTipoArco())).collect(Collectors.toList()), transicaoRequest.getConexaoDeSaidaList().stream().map(conexaoRequest -> new Conexao(conexaoRequest.getNomeTransicao() + "->" + conexaoRequest.getNomeLugar(), RedeDePetriRepository.mapeamentoLugares.get(conexaoRequest.getNomeLugar()), conexaoRequest.getPeso(), conexaoRequest.getTipoArco())).collect(Collectors.toList())));
     }
 }
