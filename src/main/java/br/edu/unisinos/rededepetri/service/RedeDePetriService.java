@@ -141,4 +141,21 @@ public class RedeDePetriService {
 
         RedeDePetriRepository.redeDePetri.getTransicaoList().remove(optionalTransicao.get());
     }
+
+    public void deletarConexao(String nomeConexao) {
+        Optional<Transicao> optionalTransicao = RedeDePetriRepository.redeDePetri.getTransicaoList().stream().filter(t -> {
+            Optional<Conexao> conexaoDeEntrada = t.getConexaoDeEntradaList().stream().filter(c -> c.getNomeConexao().equals(nomeConexao)).findAny();
+            Optional<Conexao> conexaoDeSaida = t.getConexaoDeSaidaList().stream().filter(c -> c.getNomeConexao().equals(nomeConexao)).findAny();
+            return conexaoDeEntrada.isPresent() || conexaoDeSaida.isPresent();
+        }).findAny();
+
+        if (optionalTransicao.isEmpty()) {
+            throw new RuntimeException("");
+        }
+
+        Transicao transicao = optionalTransicao.get();
+
+        transicao.getConexaoDeEntradaList().stream().filter(c -> c.getNomeConexao().equals(nomeConexao)).findAny().ifPresent(conexao -> transicao.getConexaoDeEntradaList().remove(conexao));
+        transicao.getConexaoDeSaidaList().stream().filter(c -> c.getNomeConexao().equals(nomeConexao)).findAny().ifPresent(conexao -> transicao.getConexaoDeSaidaList().remove(conexao));
+    }
 }
