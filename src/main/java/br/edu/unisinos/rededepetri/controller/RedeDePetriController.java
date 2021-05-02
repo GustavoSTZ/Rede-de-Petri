@@ -1,6 +1,5 @@
 package br.edu.unisinos.rededepetri.controller;
 
-import br.edu.unisinos.rededepetri.controller.request.ConexaoRequest;
 import br.edu.unisinos.rededepetri.controller.request.CriaConexaoRequest;
 import br.edu.unisinos.rededepetri.controller.request.RedeDePetriRequest;
 import br.edu.unisinos.rededepetri.controller.request.TransicaoRequest;
