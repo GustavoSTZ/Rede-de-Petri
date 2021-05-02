@@ -98,7 +98,7 @@ public class RedeDePetriService {
     public void criaTransicao(TransicaoRequest transicaoRequest) {
         Optional<Transicao> optionalTransicao = RedeDePetriRepository.redeDePetri.getTransicaoList().stream().filter(t -> t.getNome().equals(transicaoRequest.getNome())).findAny();
         if (optionalTransicao.isPresent()) {
-            throw new RuntimeException("Tranição já existe");
+            throw new RuntimeException("Transição: " + transicaoRequest.getNome() + " já existe");
         }
 
         List<ConexaoRequest> conexaoDeEntradaList = transicaoRequest.getConexaoDeEntradaList();
@@ -120,5 +120,15 @@ public class RedeDePetriService {
 
         RedeDePetriRepository.redeDePetri.getTransicaoList().add(
                 new Transicao(transicaoRequest.getNome(), transicaoRequest.getConexaoDeEntradaList().stream().map(conexaoRequest -> new Conexao(conexaoRequest.getNomeConexao(), RedeDePetriRepository.mapeamentoLugares.get(conexaoRequest.getNomeLugar()), conexaoRequest.getPeso(), conexaoRequest.getTipoArco())).collect(Collectors.toList()), transicaoRequest.getConexaoDeSaidaList().stream().map(conexaoRequest -> new Conexao(conexaoRequest.getNomeConexao(), RedeDePetriRepository.mapeamentoLugares.get(conexaoRequest.getNomeLugar()), conexaoRequest.getPeso(), conexaoRequest.getTipoArco())).collect(Collectors.toList())));
+    }
+
+    public void criaLugar(Lugar lugarRequest) {
+        if (RedeDePetriRepository.mapeamentoLugares.containsKey(lugarRequest.getNome())) {
+            throw new RuntimeException("Lugar: " + lugarRequest.getNome() + " já existe");
+        }
+
+        Lugar lugar = new Lugar(lugarRequest.getNome(), lugarRequest.getQuantidadeDeToken());
+        RedeDePetriRepository.redeDePetri.getLugarList().add(lugar);
+        RedeDePetriRepository.mapeamentoLugares.put(lugarRequest.getNome(), lugar);
     }
 }
