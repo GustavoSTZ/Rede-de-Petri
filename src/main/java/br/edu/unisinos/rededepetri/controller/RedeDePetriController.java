@@ -29,7 +29,7 @@ public class RedeDePetriController {
     @PostMapping("/criar/conexao")
     @ResponseStatus(HttpStatus.CREATED)
     public void criaConexao(@RequestBody @Valid ConexaoRequest conexaoRequest) {
-        //TODO redeDePetriService.criaConexa(conexaoRequest);
+        redeDePetriService.criaConexa(conexaoRequest);
     }
 
     @PostMapping("/criar/transicao")
