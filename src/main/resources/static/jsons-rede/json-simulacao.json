@@ -1,0 +1,245 @@
+{
+  "lugarList": [
+    {
+      "nome": "L1",
+      "quantidadeDeToken": 0
+    },
+    {
+      "nome": "L2",
+      "quantidadeDeToken": 2
+    },
+    {
+      "nome": "L3",
+      "quantidadeDeToken": 1
+    },
+    {
+      "nome": "L4",
+      "quantidadeDeToken": 0
+    },
+    {
+      "nome": "L5",
+      "quantidadeDeToken": 0
+    },
+    {
+      "nome": "L6",
+      "quantidadeDeToken": 0
+    },
+    {
+      "nome": "L7",
+      "quantidadeDeToken": 10
+    },
+    {
+      "nome": "L8",
+      "quantidadeDeToken": 0
+    },
+    {
+      "nome": "L9",
+      "quantidadeDeToken": 0
+    },
+    {
+      "nome": "L10",
+      "quantidadeDeToken": 0
+    },
+    {
+      "nome": "L11",
+      "quantidadeDeToken": 0
+    },
+    {
+      "nome": "L12",
+      "quantidadeDeToken": 0
+    },
+    {
+      "nome": "L13",
+      "quantidadeDeToken": 0
+    }
+  ],
+  "transicaoList": [
+    {
+      "nome": "Ta",
+      "conexaoDeEntradaList": [
+        {
+          "nomeConexao": "L1->Ta",
+          "nomeLugar": "L1",
+          "peso": 2,
+          "tipoArco": "NORMAL"
+        }
+      ],
+      "conexaoDeSaidaList": [
+        {
+          "nomeConexao": "Ta->L4",
+          "nomeLugar": "L4",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        }
+      ]
+    },
+    {
+      "nome": "Tb",
+      "conexaoDeEntradaList": [
+        {
+          "nomeConexao": "L2->Tb",
+          "nomeLugar": "L2",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        }
+      ],
+      "conexaoDeSaidaList": [
+        {
+          "nomeConexao": "Tb->L1",
+          "nomeLugar": "L1",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        },
+        {
+          "nomeConexao": "Tb->L5",
+          "nomeLugar": "L5",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        }
+      ]
+    },
+    {
+      "nome": "Tc",
+      "conexaoDeEntradaList": [
+        {
+          "nomeConexao": "L3->Tc",
+          "nomeLugar": "L3",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        }
+      ],
+      "conexaoDeSaidaList": [
+        {
+          "nomeConexao": "Tc->L6",
+          "nomeLugar": "L6",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        }
+      ]
+    },
+    {
+      "nome": "Td",
+      "conexaoDeEntradaList": [
+        {
+          "nomeConexao": "L4->Td",
+          "nomeLugar": "L4",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        },
+        {
+          "nomeConexao": "L7->Td",
+          "nomeLugar": "L7",
+          "peso": 1,
+          "tipoArco": "RESET"
+        },
+        {
+          "nomeConexao": "L8->Td",
+          "nomeLugar": "L8",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        }
+      ],
+      "conexaoDeSaidaList": [
+        {
+          "nomeConexao": "Td->L11",
+          "nomeLugar": "L11",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        }
+      ]
+    },
+    {
+      "nome": "Te",
+      "conexaoDeEntradaList": [
+        {
+          "nomeConexao": "L5->Te",
+          "nomeLugar": "L5",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        },
+        {
+          "nomeConexao": "L6->Te",
+          "nomeLugar": "L6",
+          "peso": 2,
+          "tipoArco": "INIBIDOR"
+        }
+      ],
+      "conexaoDeSaidaList": [
+        {
+          "nomeConexao": "Te->L8",
+          "nomeLugar": "L8",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        },
+        {
+          "nomeConexao": "Te->L9",
+          "nomeLugar": "L9",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        },
+        {
+          "nomeConexao": "Te->L10",
+          "nomeLugar": "L10",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        }
+      ]
+    },
+    {
+      "nome": "Tf",
+      "conexaoDeEntradaList": [
+        {
+          "nomeConexao": "L10->Tf",
+          "nomeLugar": "L10",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        },
+        {
+          "nomeConexao": "L13->Tf",
+          "nomeLugar": "L13",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        }
+      ],
+      "conexaoDeSaidaList": [
+        {
+          "nomeConexao": "Tf->L2",
+          "nomeLugar": "L2",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        }
+      ]
+    },
+    {
+      "nome": "Tg",
+      "conexaoDeEntradaList": [
+        {
+          "nomeConexao": "L9->Tg",
+          "nomeLugar": "L9",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        },
+        {
+          "nomeConexao": "L11->Tg",
+          "nomeLugar": "L11",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        }
+      ],
+      "conexaoDeSaidaList": [
+        {
+          "nomeConexao": "Tg->L12",
+          "nomeLugar": "L12",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        },
+        {
+          "nomeConexao": "Tg->L13",
+          "nomeLugar": "L13",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        }
+      ]
+    }
+  ]
+}
