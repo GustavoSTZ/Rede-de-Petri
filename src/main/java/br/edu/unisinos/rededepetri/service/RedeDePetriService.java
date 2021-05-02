@@ -1,6 +1,7 @@
 package br.edu.unisinos.rededepetri.service;
 
 import br.edu.unisinos.rededepetri.controller.request.ConexaoRequest;
+import br.edu.unisinos.rededepetri.controller.request.CriaConexaoRequest;
 import br.edu.unisinos.rededepetri.controller.request.RedeDePetriRequest;
 import br.edu.unisinos.rededepetri.domain.Conexao;
 import br.edu.unisinos.rededepetri.domain.Lugar;
@@ -70,7 +71,7 @@ public class RedeDePetriService {
                 .collect(Collectors.toList());
     }
 
-    public void criaConexa(ConexaoRequest conexaoRequest) {
+    public void criaConexa(CriaConexaoRequest conexaoRequest) {
         Transicao transicao = RedeDePetriRepository.redeDePetri.getTransicaoList().stream().filter(t -> t.getNome().equals(conexaoRequest.getNomeTransicao())).findFirst().orElseThrow();
         Lugar lugar = RedeDePetriRepository.redeDePetri.getLugarList().stream().filter(l -> l.getNome().equals(conexaoRequest.getNomeLugar())).findFirst().orElseThrow();
 

@@ -1,6 +1,7 @@
 package br.edu.unisinos.rededepetri.controller;
 
 import br.edu.unisinos.rededepetri.controller.request.ConexaoRequest;
+import br.edu.unisinos.rededepetri.controller.request.CriaConexaoRequest;
 import br.edu.unisinos.rededepetri.controller.request.RedeDePetriRequest;
 import br.edu.unisinos.rededepetri.controller.request.TransicaoRequest;
 import br.edu.unisinos.rededepetri.domain.Lugar;
@@ -28,7 +29,7 @@ public class RedeDePetriController {
 
     @PostMapping("/criar/conexao")
     @ResponseStatus(HttpStatus.CREATED)
-    public void criaConexao(@RequestBody @Valid ConexaoRequest conexaoRequest) {
+    public void criaConexao(@RequestBody @Valid CriaConexaoRequest conexaoRequest) {
         redeDePetriService.criaConexa(conexaoRequest);
     }
 
