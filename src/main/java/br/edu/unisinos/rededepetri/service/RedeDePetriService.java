@@ -131,4 +131,14 @@ public class RedeDePetriService {
         RedeDePetriRepository.redeDePetri.getLugarList().add(lugar);
         RedeDePetriRepository.mapeamentoLugares.put(lugarRequest.getNome(), lugar);
     }
+
+    public void deletarTransicao(String nomeTransicao) {
+        Optional<Transicao> optionalTransicao = RedeDePetriRepository.redeDePetri.getTransicaoList().stream().filter(t -> t.getNome().equals(nomeTransicao)).findAny();
+
+        if (optionalTransicao.isEmpty()) {
+            throw new RuntimeException("Transição: " + nomeTransicao + " não existe");
+        }
+
+        RedeDePetriRepository.redeDePetri.getTransicaoList().remove(optionalTransicao.get());
+    }
 }

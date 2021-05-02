@@ -54,7 +54,7 @@ public class RedeDePetriController {
     @DeleteMapping("/deletar/transicao/{nomeTransicao}")
     @ResponseStatus(HttpStatus.OK)
     public void deletarTransicao(@PathVariable("nomeTransicao") String nomeTransicao) {
-        //TODO redeDePetriService.deletarTransicao(nomeTransicao);
+        redeDePetriService.deletarTransicao(nomeTransicao);
     }
 
     @DeleteMapping("/deletar/transicao/{nomeConexao}")
