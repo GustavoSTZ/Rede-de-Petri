@@ -21,9 +21,11 @@ public class EngineRedeDePetriService {
         AtomicBoolean executouTransicao = new AtomicBoolean(false);
         redeDePetri.getTransicaoList()
                 .forEach(transicao -> {
+                    atualizaLugares(transicao.getConexaoDeEntradaList());
+                    atualizaLugares(transicao.getConexaoDeSaidaList());
                     if (transicao.getConexaoDeEntradaList()
                             .stream()
-                            .allMatch(conexao -> conexao.getPeso() <= conexao.getLugar().getQuantidadeDeToken())
+                            .allMatch(conexao -> conexao.getPeso() <= conexao.getLugar().getQuantidadeDeToken() || !conexao.getTipoArco().equals(TipoArco.NORMAL))
                             &&
                             transicao.getConexaoDeEntradaList()
                             .stream()
@@ -33,8 +35,6 @@ public class EngineRedeDePetriService {
                         executarTransicaoEntrada(transicao);
                         executouTransicao.set(true);
                     }
-                    atualizaLugares(transicao.getConexaoDeEntradaList());
-                    atualizaLugares(transicao.getConexaoDeSaidaList());
                 });
         if (executouTransicao.get()) {
             executarEngine();

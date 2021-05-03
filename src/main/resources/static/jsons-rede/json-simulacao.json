@@ -207,12 +207,24 @@
           "nomeLugar": "L2",
           "peso": 1,
           "tipoArco": "NORMAL"
+        },
+        {
+          "nomeConexao": "Tf->L6",
+          "nomeLugar": "L6",
+          "peso": 1,
+          "tipoArco": "NORMAL"
         }
       ]
     },
     {
       "nome": "Tg",
       "conexaoDeEntradaList": [
+        {
+          "nomeConexao": "L8->Tg",
+          "nomeLugar": "L8",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        },
         {
           "nomeConexao": "L9->Tg",
           "nomeLugar": "L9",
