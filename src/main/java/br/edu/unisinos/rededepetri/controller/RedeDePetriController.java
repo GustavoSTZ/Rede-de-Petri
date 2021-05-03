@@ -78,13 +78,13 @@ public class RedeDePetriController {
 
     @PostMapping("/adiciona/token/lugar/{nomeLugar}")
     @ResponseStatus(HttpStatus.OK)
-    public void adicionaToken(@PathVariable("nomeLugar") String nomeLugar){
+    public void adicionaToken(@PathVariable("nomeLugar") String nomeLugar) {
         redeDePetriService.adicionaToken(nomeLugar);
     }
 
     @PostMapping("/remove/token/lugar/{nomeLugar}")
     @ResponseStatus(HttpStatus.OK)
-    public void removeToken(@PathVariable("nomeLugar") String nomeLugar){
+    public void removeToken(@PathVariable("nomeLugar") String nomeLugar) {
         redeDePetriService.removeToken(nomeLugar);
     }
 }

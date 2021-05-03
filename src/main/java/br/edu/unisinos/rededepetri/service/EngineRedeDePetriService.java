@@ -72,7 +72,7 @@ public class EngineRedeDePetriService {
     }
 
     private void consomeToken(Conexao conexao) {
-        if(!conexao.getTipoArco().equals(TipoArco.INIBIDOR)){
+        if (!conexao.getTipoArco().equals(TipoArco.INIBIDOR)) {
             mapeamentoLugares.get(conexao.getLugar().getNome()).setQuantidadeDeToken(mapeamentoLugares.get(conexao.getLugar().getNome()).getQuantidadeDeToken() - (conexao.getTipoArco().equals(TipoArco.NORMAL) ? conexao.getPeso() : mapeamentoLugares.get(conexao.getLugar().getNome()).getQuantidadeDeToken()));
             conexao.getLugar().setQuantidadeDeToken(mapeamentoLugares.get(conexao.getLugar().getNome()).getQuantidadeDeToken());
         }
