@@ -4,6 +4,7 @@ import br.edu.unisinos.rededepetri.controller.request.CriaConexaoRequest;
 import br.edu.unisinos.rededepetri.controller.request.RedeDePetriRequest;
 import br.edu.unisinos.rededepetri.controller.request.TransicaoRequest;
 import br.edu.unisinos.rededepetri.domain.*;
+import br.edu.unisinos.rededepetri.repository.RedeDePetriRepository;
 import br.edu.unisinos.rededepetri.service.RedeDePetriService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,7 +72,8 @@ public class RedeDePetriController {
     @GetMapping("/tabelaTest")
     @ResponseStatus(HttpStatus.OK)
     public String tabelaTest() {
-        return redeDePetriService.imprimeTabela(List.of(new Ciclo(List.of(new TransicaoCiclo("Ta", true)), List.of(new LugarCiclo("L1", 12)))));
+        RedeDePetriRepository.ciclos = List.of(new Ciclo(List.of(new TransicaoCiclo("Ta", true)), List.of(new LugarCiclo("L1", 12))));
+        return redeDePetriService.imprimeTabela();
     }
 
 }
