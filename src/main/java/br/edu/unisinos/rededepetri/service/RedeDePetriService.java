@@ -107,22 +107,20 @@ public class RedeDePetriService {
         List<ConexaoRequest> conexaoDeEntradaList = transicaoRequest.getConexaoDeEntradaList();
         List<ConexaoRequest> conexaoDeSaidaList = transicaoRequest.getConexaoDeSaidaList();
 
-        for (ConexaoRequest conexaoDeEntrada : conexaoDeEntradaList) {
+        procuraLugar(conexaoDeEntradaList);
+        procuraLugar(conexaoDeSaidaList);
+
+        RedeDePetriRepository.redeDePetri.getTransicaoList().add(
+                new Transicao(transicaoRequest.getNome(), transicaoRequest.getConexaoDeEntradaList().stream().map(conexaoRequest -> new Conexao(conexaoRequest.getNomeConexao(), RedeDePetriRepository.mapeamentoLugares.get(conexaoRequest.getNomeLugar()), conexaoRequest.getPeso(), conexaoRequest.getTipoArco())).collect(Collectors.toList()), transicaoRequest.getConexaoDeSaidaList().stream().map(conexaoRequest -> new Conexao(conexaoRequest.getNomeConexao(), RedeDePetriRepository.mapeamentoLugares.get(conexaoRequest.getNomeLugar()), conexaoRequest.getPeso(), conexaoRequest.getTipoArco())).collect(Collectors.toList())));
+    }
+
+    private void procuraLugar(List<ConexaoRequest> conexaoList) {
+        for (ConexaoRequest conexaoDeEntrada : conexaoList) {
             Optional<Lugar> optionalLugar = RedeDePetriRepository.redeDePetri.getLugarList().stream().filter(l -> l.getNome().equals(conexaoDeEntrada.getNomeLugar())).findAny();
             if (optionalLugar.isEmpty()) {
                 throw new RuntimeException("Lugar: " + conexaoDeEntrada.getNomeLugar() + " não existe");
             }
         }
-
-        for (ConexaoRequest conexaoDeSaida : conexaoDeSaidaList) {
-            Optional<Lugar> optionalLugar = RedeDePetriRepository.redeDePetri.getLugarList().stream().filter(l -> l.getNome().equals(conexaoDeSaida.getNomeLugar())).findAny();
-            if (optionalLugar.isEmpty()) {
-                throw new RuntimeException("Lugar: " + conexaoDeSaida.getNomeLugar() + " não existe");
-            }
-        }
-
-        RedeDePetriRepository.redeDePetri.getTransicaoList().add(
-                new Transicao(transicaoRequest.getNome(), transicaoRequest.getConexaoDeEntradaList().stream().map(conexaoRequest -> new Conexao(conexaoRequest.getNomeConexao(), RedeDePetriRepository.mapeamentoLugares.get(conexaoRequest.getNomeLugar()), conexaoRequest.getPeso(), conexaoRequest.getTipoArco())).collect(Collectors.toList()), transicaoRequest.getConexaoDeSaidaList().stream().map(conexaoRequest -> new Conexao(conexaoRequest.getNomeConexao(), RedeDePetriRepository.mapeamentoLugares.get(conexaoRequest.getNomeLugar()), conexaoRequest.getPeso(), conexaoRequest.getTipoArco())).collect(Collectors.toList())));
     }
 
     public void criaLugar(Lugar lugarRequest) {
@@ -180,5 +178,19 @@ public class RedeDePetriService {
 
         System.out.println(tabela);
         return tabela.toString();
+    }
+
+    public void adicionaToken(String nomeLugar) {
+        if(RedeDePetriRepository.mapeamentoLugares.containsKey(nomeLugar)) {
+            RedeDePetriRepository.mapeamentoLugares.get(nomeLugar).setQuantidadeDeToken(RedeDePetriRepository.mapeamentoLugares.get(nomeLugar).getQuantidadeDeToken() + 1);
+        }
+        throw new ResourceNotFoundException();
+    }
+
+    public void removeToken(String nomeLugar) {
+        if(RedeDePetriRepository.mapeamentoLugares.containsKey(nomeLugar)) {
+            RedeDePetriRepository.mapeamentoLugares.get(nomeLugar).setQuantidadeDeToken(RedeDePetriRepository.mapeamentoLugares.get(nomeLugar).getQuantidadeDeToken() - 1);
+        }
+        throw new ResourceNotFoundException();
     }
 }
