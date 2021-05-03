@@ -82,12 +82,4 @@ public class EngineRedeDePetriService {
         mapeamentoLugares.get(conexao.getLugar().getNome()).setQuantidadeDeToken(mapeamentoLugares.get(conexao.getLugar().getNome()).getQuantidadeDeToken() + conexao.getPeso());
         conexao.getLugar().setQuantidadeDeToken(mapeamentoLugares.get(conexao.getLugar().getNome()).getQuantidadeDeToken());
     }
-
-    public void atualizaPassoDado() {
-        redeDePetri.getTransicaoList()
-                .forEach(transicao -> {
-                    atualizaLugares(transicao.getConexaoDeEntradaList());
-                    atualizaLugares(transicao.getConexaoDeSaidaList());
-                });
-    }
 }
