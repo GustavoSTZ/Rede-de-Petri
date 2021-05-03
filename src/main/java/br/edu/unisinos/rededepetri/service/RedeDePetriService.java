@@ -4,10 +4,7 @@ import br.edu.unisinos.rededepetri.controller.request.ConexaoRequest;
 import br.edu.unisinos.rededepetri.controller.request.CriaConexaoRequest;
 import br.edu.unisinos.rededepetri.controller.request.RedeDePetriRequest;
 import br.edu.unisinos.rededepetri.controller.request.TransicaoRequest;
-import br.edu.unisinos.rededepetri.domain.Conexao;
-import br.edu.unisinos.rededepetri.domain.Lugar;
-import br.edu.unisinos.rededepetri.domain.RedeDePetri;
-import br.edu.unisinos.rededepetri.domain.Transicao;
+import br.edu.unisinos.rededepetri.domain.*;
 import br.edu.unisinos.rededepetri.exception.ResourceNotFoundException;
 import br.edu.unisinos.rededepetri.repository.RedeDePetriRepository;
 import lombok.RequiredArgsConstructor;
@@ -90,7 +87,7 @@ public class RedeDePetriService {
 
         Optional<Conexao> optionalConexao = conexaoList.stream().filter(c -> c.getNomeConexao().equals(nomeConexao)).findAny();
 
-        if(optionalConexao.isPresent()) {
+        if (optionalConexao.isPresent()) {
             throw new RuntimeException("Conexão: " + nomeConexao + " já existe");
         }
 
@@ -163,5 +160,25 @@ public class RedeDePetriService {
 
         transicao.getConexaoDeEntradaList().stream().filter(c -> c.getNomeConexao().equals(nomeConexao)).findAny().ifPresent(conexao -> transicao.getConexaoDeEntradaList().remove(conexao));
         transicao.getConexaoDeSaidaList().stream().filter(c -> c.getNomeConexao().equals(nomeConexao)).findAny().ifPresent(conexao -> transicao.getConexaoDeSaidaList().remove(conexao));
+    }
+
+    public String imprimeTabela() {
+        if (RedeDePetriRepository.ciclos.isEmpty()) {
+            throw new RuntimeException("Lista vazia");
+        }
+
+        StringBuilder tabela = new StringBuilder("| Nº do ciclo | ");
+        RedeDePetriRepository.ciclos.get(0).getLugares().forEach(lugar -> tabela.append(lugar.getNome()).append(" | "));
+        RedeDePetriRepository.ciclos.get(0).getTransicoes().forEach(transicao -> tabela.append(transicao.getNome()).append(" | "));
+        tabela.append("\n");
+
+        for (int i = 0; i < RedeDePetriRepository.ciclos.size(); i++) {
+            tabela.append("|      ").append(i).append("      | ");
+            RedeDePetriRepository.ciclos.get(i).getLugares().forEach(lugar -> tabela.append(lugar.getQuantidadeDeToken()).append(" | "));
+            RedeDePetriRepository.ciclos.get(i).getTransicoes().forEach(transicao -> tabela.append(transicao.isHabilitada() ? "S " : "N ").append(" | "));
+        }
+
+        System.out.println(tabela);
+        return tabela.toString();
     }
 }
