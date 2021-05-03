@@ -17,7 +17,7 @@ import static br.edu.unisinos.rededepetri.repository.RedeDePetriRepository.redeD
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class EngineRedeDePetriService {
 
-    public void executarEngine() {
+    public boolean executarEnginePassoAPasso() {
         AtomicBoolean executouTransicao = new AtomicBoolean(false);
         redeDePetri.getTransicaoList()
                 .forEach(transicao -> {
@@ -28,15 +28,19 @@ public class EngineRedeDePetriService {
                             .allMatch(conexao -> conexao.getPeso() <= conexao.getLugar().getQuantidadeDeToken() || !conexao.getTipoArco().equals(TipoArco.NORMAL))
                             &&
                             transicao.getConexaoDeEntradaList()
-                            .stream()
-                            .noneMatch(conexao -> conexao.getTipoArco().equals(TipoArco.INIBIDOR)
-                                    && conexao.getPeso() <= conexao.getLugar().getQuantidadeDeToken())
+                                    .stream()
+                                    .noneMatch(conexao -> conexao.getTipoArco().equals(TipoArco.INIBIDOR)
+                                            && conexao.getPeso() <= conexao.getLugar().getQuantidadeDeToken())
                     ) {
                         executarTransicaoEntrada(transicao);
                         executouTransicao.set(true);
                     }
                 });
-        if (executouTransicao.get()) {
+        return executouTransicao.get();
+    }
+
+    public void executarEngine() {
+        if (executarEnginePassoAPasso()) {
             executarEngine();
         }
     }
