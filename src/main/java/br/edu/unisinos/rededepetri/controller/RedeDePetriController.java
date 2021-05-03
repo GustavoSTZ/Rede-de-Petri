@@ -3,8 +3,7 @@ package br.edu.unisinos.rededepetri.controller;
 import br.edu.unisinos.rededepetri.controller.request.CriaConexaoRequest;
 import br.edu.unisinos.rededepetri.controller.request.RedeDePetriRequest;
 import br.edu.unisinos.rededepetri.controller.request.TransicaoRequest;
-import br.edu.unisinos.rededepetri.domain.Lugar;
-import br.edu.unisinos.rededepetri.domain.RedeDePetri;
+import br.edu.unisinos.rededepetri.domain.*;
 import br.edu.unisinos.rededepetri.service.RedeDePetriService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping()
@@ -66,6 +66,12 @@ public class RedeDePetriController {
     @ResponseStatus(HttpStatus.OK)
     public RedeDePetri getRedeDePetri() {
         return redeDePetriService.getRedeDePetri();
+    }
+
+    @GetMapping("/tabelaTest")
+    @ResponseStatus(HttpStatus.OK)
+    public String tabelaTest() {
+        return redeDePetriService.imprimeTabela(List.of(new Ciclo(List.of(new TransicaoCiclo("Ta", true)), List.of(new LugarCiclo("L1", 12)))));
     }
 
 }
