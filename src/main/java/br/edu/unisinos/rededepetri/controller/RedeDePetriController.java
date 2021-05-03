@@ -69,13 +69,6 @@ public class RedeDePetriController {
         return redeDePetriService.getRedeDePetri();
     }
 
-    @GetMapping("/tabelaTest")
-    @ResponseStatus(HttpStatus.OK)
-    public String tabelaTest() {
-        RedeDePetriRepository.ciclos = List.of(new Ciclo(List.of(new TransicaoCiclo("Ta", true)), List.of(new LugarCiclo("L1", 12))));
-        return redeDePetriService.imprimeTabela();
-    }
-
     @PostMapping("/adiciona/token/lugar/{nomeLugar}")
     @ResponseStatus(HttpStatus.OK)
     public void adicionaToken(@PathVariable("nomeLugar") String nomeLugar) {

@@ -165,26 +165,6 @@ public class RedeDePetriService {
         transicao.getConexaoDeSaidaList().stream().filter(c -> c.getNomeConexao().equals(nomeConexao)).findAny().ifPresent(conexao -> transicao.getConexaoDeSaidaList().remove(conexao));
     }
 
-    public String imprimeTabela() {
-        if (RedeDePetriRepository.ciclos.isEmpty()) {
-            throw new RuntimeException("Lista vazia");
-        }
-
-        StringBuilder tabela = new StringBuilder("| Nº do ciclo | ");
-        RedeDePetriRepository.ciclos.get(0).getLugares().forEach(lugar -> tabela.append(lugar.getNome()).append(" | "));
-        RedeDePetriRepository.ciclos.get(0).getTransicoes().forEach(transicao -> tabela.append(transicao.getNome()).append(" | "));
-        tabela.append("\n");
-
-        for (int i = 0; i < RedeDePetriRepository.ciclos.size(); i++) {
-            tabela.append("|      ").append(i).append("      | ");
-            RedeDePetriRepository.ciclos.get(i).getLugares().forEach(lugar -> tabela.append(lugar.getQuantidadeDeToken()).append(" | "));
-            RedeDePetriRepository.ciclos.get(i).getTransicoes().forEach(transicao -> tabela.append(transicao.isHabilitada() ? "S " : "N ").append(" | "));
-        }
-
-        System.out.println(tabela);
-        return tabela.toString();
-    }
-
     public void adicionaToken(String nomeLugar) {
         if (RedeDePetriRepository.mapeamentoLugares.containsKey(nomeLugar)) {
             RedeDePetriRepository.mapeamentoLugares.get(nomeLugar).setQuantidadeDeToken(RedeDePetriRepository.mapeamentoLugares.get(nomeLugar).getQuantidadeDeToken() + 1);
