@@ -1,0 +1,57 @@
+{
+  "lugarList": [
+    {
+      "nome": "L1",
+      "quantidadeDeToken": 1
+    },
+    {
+      "nome": "L2",
+      "quantidadeDeToken": 0
+    },
+    {
+      "nome": "L3",
+      "quantidadeDeToken": 0
+    }
+  ],
+  "transicaoList": [
+    {
+      "nome": "T1",
+      "conexaoDeEntradaList": [
+        {
+          "nomeConexao": "L1->T1",
+          "nomeLugar": "L1",
+          "peso": 1,
+           "tipoArco": "NORMAL"
+        }
+      ],
+      "conexaoDeSaidaList": [
+        {
+          "nomeConexao": "T1->L2",
+          "nomeLugar": "L2",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        }
+      ]
+    },
+    {
+      "nome": "T2",
+      "conexaoDeEntradaList": [
+        {
+          "nomeConexao": "L1->T2",
+          "nomeLugar": "L1",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        }
+      ],
+      "conexaoDeSaidaList": [
+        {
+          "nomeConexao": "T2->L3",
+          "nomeLugar": "L3",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        }
+      ]
+    }
+
+  ]
+}
