@@ -30,7 +30,7 @@ public class RedeDePetriController {
     @PostMapping("/criar/conexao")
     @ResponseStatus(HttpStatus.CREATED)
     public void criaConexao(@RequestBody @Valid CriaConexaoRequest conexaoRequest) {
-        redeDePetriService.criaConexa(conexaoRequest);
+        redeDePetriService.criaConexao(conexaoRequest);
     }
 
     @PostMapping("/criar/transicao")
@@ -57,7 +57,7 @@ public class RedeDePetriController {
         redeDePetriService.deletarTransicao(nomeTransicao);
     }
 
-    @DeleteMapping("/deletar/transicao/{nomeConexao}")
+    @DeleteMapping("/deletar/conexao/{nomeConexao}")
     @ResponseStatus(HttpStatus.OK)
     public void deletarConexao(@PathVariable("nomeConexao") String nomeConexao) {
         redeDePetriService.deletarConexao(nomeConexao);

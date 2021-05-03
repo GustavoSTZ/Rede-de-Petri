@@ -26,6 +26,7 @@ public class EngineRedeDePetriController {
     @GetMapping("/executar/passo")
     public ResponseEntity<RedeDePetri> executarEnginePassoAPasso() {
         if (engineRedeDePetriService.executarEnginePassoAPasso()) {
+            engineRedeDePetriService.atualizaPassoDado();
             return new ResponseEntity<>(redeDePetri, HttpStatus.OK);
         }
         return new ResponseEntity<>(redeDePetri, HttpStatus.ALREADY_REPORTED);

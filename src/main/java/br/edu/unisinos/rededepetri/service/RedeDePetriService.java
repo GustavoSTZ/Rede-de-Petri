@@ -19,6 +19,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static br.edu.unisinos.rededepetri.repository.RedeDePetriRepository.mapeamentoLugares;
+import static br.edu.unisinos.rededepetri.repository.RedeDePetriRepository.redeDePetri;
 import static java.util.Objects.isNull;
 
 @Service
@@ -73,7 +75,7 @@ public class RedeDePetriService {
                 .collect(Collectors.toList());
     }
 
-    public void criaConexa(CriaConexaoRequest conexaoRequest) {
+    public void criaConexao(CriaConexaoRequest conexaoRequest) {
         Transicao transicao = RedeDePetriRepository.redeDePetri.getTransicaoList().stream().filter(t -> t.getNome().equals(conexaoRequest.getNomeTransicao())).findFirst().orElseThrow();
         Lugar lugar = RedeDePetriRepository.redeDePetri.getLugarList().stream().filter(l -> l.getNome().equals(conexaoRequest.getNomeLugar())).findFirst().orElseThrow();
 
@@ -186,14 +188,16 @@ public class RedeDePetriService {
     public void adicionaToken(String nomeLugar) {
         if (RedeDePetriRepository.mapeamentoLugares.containsKey(nomeLugar)) {
             RedeDePetriRepository.mapeamentoLugares.get(nomeLugar).setQuantidadeDeToken(RedeDePetriRepository.mapeamentoLugares.get(nomeLugar).getQuantidadeDeToken() + 1);
+        } else{
+            throw new ResourceNotFoundException();
         }
-        throw new ResourceNotFoundException();
     }
 
     public void removeToken(String nomeLugar) {
         if (RedeDePetriRepository.mapeamentoLugares.containsKey(nomeLugar)) {
             RedeDePetriRepository.mapeamentoLugares.get(nomeLugar).setQuantidadeDeToken(RedeDePetriRepository.mapeamentoLugares.get(nomeLugar).getQuantidadeDeToken() - 1);
+        } else {
+            throw new ResourceNotFoundException();
         }
-        throw new ResourceNotFoundException();
     }
 }
