@@ -1,0 +1,196 @@
+{
+  "lugarList": [
+    {
+      "nome": "garcomLivre",
+      "quantidadeDeToken": 2
+    },
+    {
+      "nome": "substituirCaixa",
+      "quantidadeDeToken": 0
+    },
+    {
+      "nome": "pedidoPronto",
+      "quantidadeDeToken": 0
+    },
+    {
+      "nome": "clienteVaiSentar",
+      "quantidadeDeToken": 0
+    },
+    {
+      "nome": "garcomNoCaixa",
+      "quantidadeDeToken": 0
+    },
+    {
+      "nome": "levandoPedido",
+      "quantidadeDeToken": 0
+    },
+    {
+      "nome": "higienizacaoMesaOuBalcao",
+      "quantidadeDeToken": 0
+    },
+    {
+      "nome": "atendenteVoltouDoBanheiro",
+      "quantidadeDeToken": 0
+    },
+    {
+      "nome": "pedidoEntregue",
+      "quantidadeDeToken": 0
+    },
+    {
+      "nome": "mesaOuBalcaoHigienizado",
+      "quantidadeDeToken": 0
+    }
+  ],
+  "transicaoList": [
+    {
+      "nome": "T1",
+      "conexaoDeEntradaList": [
+        {
+          "nomeConexao": "garcomLivre->T1",
+          "nomeLugar": "garcomLivre",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        },
+        {
+          "nomeConexao": "substituirCaixa->T1",
+          "nomeLugar": "substituirCaixa",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        }
+      ],
+      "conexaoDeSaidaList": [
+        {
+          "nomeConexao": "T1->garcomNoCaixa",
+          "nomeLugar": "garcomNoCaixa",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        }
+      ]
+    },
+    {
+      "nome": "T2",
+      "conexaoDeEntradaList": [
+        {
+          "nomeConexao": "garcomLivre->T2",
+          "nomeLugar": "garcomLivre",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        },
+        {
+          "nomeConexao": "pedidoPronto->T2",
+          "nomeLugar": "pedidoPronto",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        }
+      ],
+      "conexaoDeSaidaList": [
+        {
+          "nomeConexao": "T2->levandoPedido",
+          "nomeLugar": "levandoPedido",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        }
+      ]
+    },
+    {
+      "nome": "T3",
+      "conexaoDeEntradaList": [
+        {
+          "nomeConexao": "garcomLivre->T3",
+          "nomeLugar": "garcomLivre",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        },
+        {
+          "nomeConexao": "clienteVaiSentar->T3",
+          "nomeLugar": "clienteVaiSentar",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        }
+      ],
+      "conexaoDeSaidaList": [
+        {
+          "nomeConexao": "T3->higienizacaoMesaOuBalcao",
+          "nomeLugar": "higienizacaoMesaOuBalcao",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        }
+      ]
+    },
+    {
+      "nome": "T4",
+      "conexaoDeEntradaList": [
+        {
+          "nomeConexao": "garcomNoCaixa->T4",
+          "nomeLugar": "garcomNoCaixa",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        },
+        {
+          "nomeConexao": "atendenteVoltouDoBanheiro->T4",
+          "nomeLugar": "atendenteVoltouDoBanheiro",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        }
+      ],
+      "conexaoDeSaidaList": [
+        {
+          "nomeConexao": "T4->garcomLivre",
+          "nomeLugar": "garcomLivre",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        }
+      ]
+    },
+    {
+      "nome": "T5",
+      "conexaoDeEntradaList": [
+        {
+          "nomeConexao": "levandoPedido->T5",
+          "nomeLugar": "levandoPedido",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        },
+        {
+          "nomeConexao": "pedidoEntregue->T5",
+          "nomeLugar": "pedidoEntregue",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        }
+      ],
+      "conexaoDeSaidaList": [
+        {
+          "nomeConexao": "T5->garcomLivre",
+          "nomeLugar": "garcomLivre",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        }
+      ]
+    },
+    {
+      "nome": "T6",
+      "conexaoDeEntradaList": [
+        {
+          "nomeConexao": "higienizacaoMesaOuBalcao->T6",
+          "nomeLugar": "higienizacaoMesaOuBalcao",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        },
+        {
+          "nomeConexao": "mesaOuBalcaoHigienizado->T6",
+          "nomeLugar": "mesaOuBalcaoHigienizado",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        }
+      ],
+      "conexaoDeSaidaList": [
+        {
+          "nomeConexao": "T6->garcomLivre",
+          "nomeLugar": "garcomLivre",
+          "peso": 1,
+          "tipoArco": "NORMAL"
+        }
+      ]
+    }
+  ]
+}

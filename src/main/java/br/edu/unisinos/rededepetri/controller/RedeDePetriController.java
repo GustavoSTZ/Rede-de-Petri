@@ -3,16 +3,22 @@ package br.edu.unisinos.rededepetri.controller;
 import br.edu.unisinos.rededepetri.controller.request.CriaConexaoRequest;
 import br.edu.unisinos.rededepetri.controller.request.RedeDePetriRequest;
 import br.edu.unisinos.rededepetri.controller.request.TransicaoRequest;
-import br.edu.unisinos.rededepetri.domain.*;
-import br.edu.unisinos.rededepetri.repository.RedeDePetriRepository;
+import br.edu.unisinos.rededepetri.domain.Lugar;
+import br.edu.unisinos.rededepetri.domain.RedeDePetri;
 import br.edu.unisinos.rededepetri.service.RedeDePetriService;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import java.util.List;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping()
@@ -69,15 +75,21 @@ public class RedeDePetriController {
         return redeDePetriService.getRedeDePetri();
     }
 
-    @PostMapping("/adiciona/token/lugar/{nomeLugar}")
+    @PatchMapping("/adiciona/token/lugar/{nomeLugar}")
     @ResponseStatus(HttpStatus.OK)
     public void adicionaToken(@PathVariable("nomeLugar") String nomeLugar) {
         redeDePetriService.adicionaToken(nomeLugar);
     }
 
-    @PostMapping("/remove/token/lugar/{nomeLugar}")
+    @PatchMapping("/remove/token/lugar/{nomeLugar}")
     @ResponseStatus(HttpStatus.OK)
     public void removeToken(@PathVariable("nomeLugar") String nomeLugar) {
         redeDePetriService.removeToken(nomeLugar);
+    }
+
+    @GetMapping("/consultar/token/lugar/{nomeLugar}")
+    @ResponseStatus(HttpStatus.OK)
+    public Integer getToken(@PathVariable("nomeLugar") String nomeLugar) {
+        return redeDePetriService.getToken(nomeLugar);
     }
 }

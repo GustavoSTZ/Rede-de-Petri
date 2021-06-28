@@ -179,4 +179,12 @@ public class RedeDePetriService {
             throw new ResourceNotFoundException();
         }
     }
+
+    public Integer getToken(String nomeLugar) {
+        if (RedeDePetriRepository.mapeamentoLugares.containsKey(nomeLugar)) {
+            return RedeDePetriRepository.mapeamentoLugares.get(nomeLugar).getQuantidadeDeToken();
+        } else {
+            throw new ResourceNotFoundException();
+        }
+    }
 }

@@ -23,6 +23,12 @@ public class EngineRedeDePetriController {
         engineRedeDePetriService.executarEngine();
     }
 
+    @PostMapping("/executar/tudo/sem-parar")
+    @ResponseStatus(HttpStatus.OK)
+    public void executarEngineSemParar() {
+        engineRedeDePetriService.executarEngineSemParar();
+    }
+
     @GetMapping("/executar/passo")
     public ResponseEntity<RedeDePetri> executarEnginePassoAPasso() {
         if (engineRedeDePetriService.executarEnginePassoAPasso()) {

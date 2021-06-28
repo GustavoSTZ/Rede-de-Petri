@@ -5,6 +5,7 @@ import br.edu.unisinos.rededepetri.domain.TipoArco;
 import br.edu.unisinos.rededepetri.domain.Transicao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,6 +43,13 @@ public class EngineRedeDePetriService {
     public void executarEngine() {
         if (executarEnginePassoAPasso()) {
             executarEngine();
+        }
+    }
+
+    @Async
+    public void executarEngineSemParar() {
+        while (true){
+            executarEnginePassoAPasso();
         }
     }
 
