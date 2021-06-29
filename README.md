@@ -16,4 +16,4 @@ Cria a rede atravez de um endpoint via json e através dos endpoints pode ser ma
 
 ### Swagger:
 
-http://localhost:8080/rede-de-petri/swagger-ui.html
+http://localhost:8085/rede-de-petri/swagger-ui.html
